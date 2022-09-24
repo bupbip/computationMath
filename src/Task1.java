@@ -3,8 +3,6 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Task1 {
-
-    public static int solveNumber = 0;
     public static final double eps = Math.pow(10, -8);
 
     public static double a = 2, n = 2;
@@ -14,24 +12,24 @@ public class Task1 {
         LinkedList<Points> points = new LinkedList<>();
         Scanner in = new Scanner(System.in);
         equations.add(x -> Math.sin(x) - 2 * Math.pow(x, 2) + 0.5);
-        equations.add(x -> Math.pow(x,n) - a);
+        equations.add(x -> Math.pow(x, n) - a);
         equations.add(x -> Math.sqrt(1 - Math.pow(x, 2)) - Math.exp(x) + 0.1);
         equations.add(x -> Math.pow(x, 6) - 5 * Math.pow(x, 3) - 2);
         equations.add(x -> Math.log(x) - (1 / (1 + Math.pow(x, 2))));
         equations.add(x -> Math.pow(3, x) - 5 * Math.pow(x, 2) + 1);
         equations.add(x -> Math.sin(x));
         equations.add(x -> Math.log(x) - 1);
-        points.add(new Points(0,1,1));
-        points.add(new Points(1,2,1));
-        points.add(new Points(0,1,0));
-        points.add(new Points(-1,0,-1));
-        points.add(new Points(1,2,1));
-        points.add(new Points(0,1,1));
+        points.add(new Points(0, 1, 1));
+        points.add(new Points(1, 2, 1));
+        points.add(new Points(0, 1, 0));
+        points.add(new Points(-1, 0, -1));
+        points.add(new Points(1, 2, 1));
+        points.add(new Points(0, 1, 1));
         points.add(new Points(3));
         points.add(new Points(2));
         for (int i = 0; i < equations.size(); i++) {
             System.out.println((i + 1) + ")");
-            if(i < 6) dichotomy(equations.get(0), points.get(i).x1, points.get(i).x2);
+            if (i < 6) dichotomy(equations.get(0), points.get(i).x1, points.get(i).x2);
             newton(equations.get(i), points.get(i).newtonNumber);
             System.out.println("________________________________");
         }
@@ -61,7 +59,7 @@ public class Task1 {
         System.out.println("Ответ = " + (firstPoint + secondPoint) / 2);
     }
 
-    public static void newton(Operationable func,double choosePoint) {
+    public static void newton(Operationable func, double choosePoint) {
         int iterationNumber = 0;
         double currentX = choosePoint;
         double nextX;

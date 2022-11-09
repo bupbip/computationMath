@@ -21,7 +21,7 @@ public class Task1 {
         equations.add(x -> Math.log(x) - 1);
         points.add(new Points(0, 1, 1));
         points.add(new Points(1, 2, 1));
-        points.add(new Points(0, 1, 0));
+        points.add(new Points(0, 1, 0.5));
         points.add(new Points(-1, 0, -1));
         points.add(new Points(1, 2, 1));
         points.add(new Points(0, 1, 1));
@@ -29,7 +29,11 @@ public class Task1 {
         points.add(new Points(2));
         for (int i = 0; i < equations.size(); i++) {
             System.out.println((i + 1) + ")");
-            if (i < 6) dichotomy(equations.get(0), points.get(i).x1, points.get(i).x2);
+            if (i < 6) {
+                System.out.println("Метод дихотомии: ");
+                dichotomy(equations.get(i), points.get(i).x1, points.get(i).x2);
+            }
+            System.out.println("Метод Ньютона: ");
             newton(equations.get(i), points.get(i).newtonNumber);
             System.out.println("________________________________");
         }
@@ -39,10 +43,6 @@ public class Task1 {
     public static void dichotomy(Operationable func, double firstPoint, double secondPoint) {
         int iterationNumber = 0;
         double approximation = secondPoint - firstPoint;
-        if ((func.calculate(firstPoint) * func.calculate(secondPoint)) > 0) {
-            System.out.println("На данном отрезке нет решений.\n");
-            return;
-        }
         while (approximation > eps) {
             double currentX = (firstPoint + secondPoint) / 2;
             // значение функции в первой точке пр-ка должно иметь противоположный знак значению в точке Х
@@ -52,9 +52,9 @@ public class Task1 {
                 firstPoint = currentX;
             }
             iterationNumber++;
-            approximation = secondPoint - firstPoint;
+            approximation = Math.abs(secondPoint - firstPoint);
             System.out.println("Номер итерации = " + iterationNumber);
-            System.out.println("Приближение = " + approximation);
+            System.out.println("Приближение = " + currentX);
         }
         System.out.println("Ответ = " + (firstPoint + secondPoint) / 2);
     }
